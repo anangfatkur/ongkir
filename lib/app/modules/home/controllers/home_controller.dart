@@ -31,8 +31,19 @@ class HomeController extends GetxController {
   var hidKotaTujuan = true.obs;
   var provinsiTujuanId = 0.obs;
   var kotaTujuanId = 0.obs;
+  var hidOngkir = true.obs;
+  var kirimLewat = "".obs;
 
   late TextEditingController weightController;
+
+  void showOngkir() {
+    if (kotaAsalId != 0 && kotaTujuanId != 0 && berat > 0 && kirimLewat != "") {
+      hidOngkir.value = false;
+    } else {
+      hidOngkir.value = true;
+    }
+  }
+
   void ubahBerat(String value) {
     berat = double.tryParse(value) ?? 0.0;
     String cekSatuan = satuan;
@@ -56,6 +67,8 @@ class HomeController extends GetxController {
         berat = berat;
     }
     print("$berat gram");
+    showOngkir();
+
   }
 
   void ubahSatuan(String value) {
@@ -81,6 +94,7 @@ class HomeController extends GetxController {
     }
     satuan = value;
     print("$berat gram");
+    showOngkir();
   }
 
   double berat = 0.0;

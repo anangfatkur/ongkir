@@ -66,19 +66,16 @@ class buildKota extends GetView<HomeController> {
               controller.kotaTujuanId.value = int.parse(kota.cityId!);
             }
             // print(provinsi.province);
-
+            controller.showOngkir();
           } else {
             if (tipe == "asal") {
               print("Tidak Memilih Kota / Kabupaten Asal");
+              controller.kotaAsalId.value = 0;
             } else {
               print("Tidak Memilih Kota / Kabupaten Tujuan");
+              controller.kotaTujuanId.value = 0;
               // int.parse(provinsi.provinceId!);
             }
-          }
-          if (kota != null) {
-            print(kota.cityName);
-          } else {
-            print("Tidak Memilih Kota / Kabupaten");
           }
         },
         showSearchBox: true,

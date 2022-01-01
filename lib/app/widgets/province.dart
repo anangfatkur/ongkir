@@ -64,7 +64,9 @@ class buildProvinsi extends GetView<HomeController> {
               controller.provinsiTujuanId.value =
                   int.parse(provinsi.provinceId!);
             }
+
             // print(provinsi.province);
+          controller.showOngkir();
 
           } else {
             if (tipe == "asal") {
@@ -75,7 +77,6 @@ class buildProvinsi extends GetView<HomeController> {
               controller.provinsiTujuanId.value = 0;
               // int.parse(provinsi.provinceId!);
             }
-
             // print("Tidak Memilih Provinsi");
           }
         },
@@ -87,8 +88,8 @@ class buildProvinsi extends GetView<HomeController> {
           ),
           hintText: "Cari Provinsi...",
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
+              // borderRadius: BorderRadius.circular(50),
+              ),
         ),
         popupItemBuilder: (context, item, isSelected) {
           return Container(
