@@ -18,6 +18,10 @@ class HomeController extends GetxController {
   // void onClose() {}
   // void increment() => count.value++;
 
-  var hidKota = true.obs;
-  var provinsiId = 0.obs;
+  var hidKotaAsal = true.obs;
+  var provinsiAsalId = 0.obs;
+  var kotaAsalId = 0.obs;
+  var hidKotaTujuan = true.obs;
+  var provinsiTujuanId = 0.obs;
+  var kotaTujuanId = 0.obs;
 }
