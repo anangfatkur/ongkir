@@ -55,11 +55,11 @@ class HomeView extends GetView<HomeController> {
                   "name": "Jalur Nugraha Ekakurir(JNE)",
                 },
                 {
-                  "code": "jne",
+                  "code": "tiki",
                   "name": "Titipan Kilat(TIKI)",
                 },
                 {
-                  "code": "jne",
+                  "code": "pos",
                   "name": "Perusahaan Operasional Surat(POS)",
                 }
               ],
@@ -93,7 +93,7 @@ class HomeView extends GetView<HomeController> {
             () => controller.hidOngkir.isTrue
                 ? SizedBox()
                 : ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => controller.totalOngkir(),
                     child: Text("Cek Ongkos Kirim"),
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(

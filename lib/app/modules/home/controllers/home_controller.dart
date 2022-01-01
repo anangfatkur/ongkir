@@ -1,7 +1,11 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:ongkirku/app/modules/home/courier_model.dart';
 
 class HomeController extends GetxController {
   // //TODO: Implement HomeController
@@ -37,10 +41,61 @@ class HomeController extends GetxController {
   late TextEditingController weightController;
 
   void showOngkir() {
+    // ignore: unrelated_type_equality_checks
     if (kotaAsalId != 0 && kotaTujuanId != 0 && berat > 0 && kirimLewat != "") {
       hidOngkir.value = false;
     } else {
       hidOngkir.value = true;
+    }
+  }
+
+  void totalOngkir() async {
+    Uri url = Uri.parse("https://api.rajaongkir.com/starter/cost");
+    try {
+      final response = await http.post(
+        url,
+        body: {
+          "origin": "$kotaAsalId",
+          "destination": "$kotaTujuanId",
+          "weight": "$berat",
+          "courier": "$kirimLewat",
+        },
+        headers: {
+          "key": "a76d61456e6590daf8173208032be001",
+          "content-type": "application/x-www-form-urlencoded",
+        },
+      );
+      var data = json.decode(response.body) as Map<String, dynamic>;
+      var results = data["rajaongkir"]["results"] as List<dynamic>;
+
+      var listAllCourier = Courier.fromJsonList(results);
+      var courier = listAllCourier[0];
+      // print();
+
+      Get.defaultDialog(
+        title: courier.name!,
+        content: Column(
+          children: courier.costs!
+              .map(
+                (e) => ListTile(
+                  title: Text("${e.service}"),
+                  subtitle: Text("Rp ${e.cost![0].value}"),
+                  trailing: Text(
+                    courier.code == "pos"
+                        ? "${e.cost![0].etd}"
+                        : "${e.cost![0].etd} HARI",
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      );
+    } catch (e) {
+      print(e);
+      Get.defaultDialog(
+        title: "Terjadi Kesalahan",
+        middleText: e.toString(),
+      );
     }
   }
 
@@ -68,7 +123,6 @@ class HomeController extends GetxController {
     }
     print("$berat gram");
     showOngkir();
-
   }
 
   void ubahSatuan(String value) {

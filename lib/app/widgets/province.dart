@@ -66,7 +66,6 @@ class buildProvinsi extends GetView<HomeController> {
             }
 
             // print(provinsi.province);
-          controller.showOngkir();
 
           } else {
             if (tipe == "asal") {
@@ -79,6 +78,7 @@ class buildProvinsi extends GetView<HomeController> {
             }
             // print("Tidak Memilih Provinsi");
           }
+            controller.showOngkir();
         },
         showSearchBox: true,
         dropdownSearchDecoration: InputDecoration(

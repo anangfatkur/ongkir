@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_is_empty
+
 class Province {
   String? provinceId;
   String? province;
