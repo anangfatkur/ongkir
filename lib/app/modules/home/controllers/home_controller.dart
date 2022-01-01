@@ -1,3 +1,6 @@
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -5,9 +8,10 @@ class HomeController extends GetxController {
 
   // final count = 0.obs;
   // @override
-  // void onInit() {
-  //   super.onInit();
-  // }
+  void onInit() {
+    weightController = TextEditingController(text: "$berat");
+    // super.onInit();
+  }
 
   // @override
   // void onReady() {
@@ -15,7 +19,10 @@ class HomeController extends GetxController {
   // }
 
   // @override
-  // void onClose() {}
+  void onClose() {
+    weightController.dispose();
+    super.onClose();
+  }
   // void increment() => count.value++;
 
   var hidKotaAsal = true.obs;
@@ -24,4 +31,58 @@ class HomeController extends GetxController {
   var hidKotaTujuan = true.obs;
   var provinsiTujuanId = 0.obs;
   var kotaTujuanId = 0.obs;
+
+  late TextEditingController weightController;
+  void ubahBerat(String value) {
+    berat = double.tryParse(value) ?? 0.0;
+    String cekSatuan = satuan;
+    switch (cekSatuan) {
+      case "ton":
+        berat = berat * 1000000;
+        break;
+      case "kwintal":
+        berat = berat * 100000;
+        break;
+      case "kg":
+        berat = berat * 1000;
+        break;
+      case "gram":
+        berat = berat;
+        break;
+      case "ons":
+        berat = berat * 100;
+        break;
+      default:
+        berat = berat;
+    }
+    print("$berat gram");
+  }
+
+  void ubahSatuan(String value) {
+    berat = double.tryParse(weightController.text) ?? 0.0;
+    switch (value) {
+      case "ton":
+        berat = berat * 1000000;
+        break;
+      case "kwintal":
+        berat = berat * 100000;
+        break;
+      case "kg":
+        berat = berat * 1000;
+        break;
+      case "gram":
+        berat = berat;
+        break;
+      case "ons":
+        berat = berat * 100;
+        break;
+      default:
+        berat = berat;
+    }
+    satuan = value;
+    print("$berat gram");
+  }
+
+  double berat = 0.0;
+  String satuan = "gram";
 }

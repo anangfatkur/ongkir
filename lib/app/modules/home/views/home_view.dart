@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
-import 'package:ongkirku/app/widgets/city.dart';
-import 'package:ongkirku/app/widgets/province.dart';
+import '/app/widgets/city.dart';
+import '/app/widgets/province.dart';
+import '/app/widgets/costWeight.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -37,6 +38,7 @@ class HomeView extends GetView<HomeController> {
                     tipe: "tujuan",
                   ),
           ),
+          Weight()
         ],
       ),
     );
